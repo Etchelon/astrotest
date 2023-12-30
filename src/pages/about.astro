@@ -1,13 +1,85 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const identity = {
+  firstName: "Andrea",
+  country: "Italy",
+  occupation: "Software Engineer",
+  hobbies: ["Padel", "Board Games", "Hiking", "Fishing"],
+};
+
+const skills = [
+  "Javascript",
+  "Typescript",
+  "React",
+  "Svelte",
+  "Angular",
+  "HTML",
+  "CSS",
+  "and now even Astro!",
+];
+
+let showBackendSkills = false;
+function toggleBackendSkills() {
+  showBackendSkills = !showBackendSkills;
+}
+const backendSkills = [
+  "C#",
+  ".NET Core",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "PostgreSQL",
+  "GraphQL",
+  "Apollo",
+];
+
+let skillColor = "green";
 ---
 
 <Layout title="About">
-  <h2>ABOUT</h2>
+  <p>Here are a few facts about me:</p>
+  <ul>
+    <li>My name is {identity.firstName}.</li>
+    <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+    {
+      identity.hobbies.length >= 2 && (
+        <li>
+          Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
+        </li>
+      )
+    }
+  </ul>
+  <p>My Frontend skills are:</p>
+  <ul>
+    {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </ul>
+  <div>
+    <input
+      id="showBE"
+      type="checkbox"
+      value={showBackendSkills}
+      onchange={toggleBackendSkills}
+    />
+    <label for="showBE">Show Backend skills</label>
+  </div>
+  {
+    showBackendSkills && (
+      <>
+        <p>My Backend skills are:</p>
+        <ul>
+          {backendSkills.map((skill) => (
+            <li class="skill">{skill}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </Layout>
 
-<style>
-    h2 {
-        color: white;
-    }
+<style define:vars={{ skillColor }}>
+  .skill {
+    color: var(--skillColor);
+    font-weight: bold;
+  }
 </style>

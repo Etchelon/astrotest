@@ -1,13 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BlogPost from "../components/BlogPost.astro";
+
+const allPosts = await Astro.glob("./posts/*.md");
 ---
 
-<Layout title="About">
+<Layout title="Blog">
   <h2>Blog</h2>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <BlogPost url={post.url} title={post.frontmatter.title} />
+      ))
+    }
+  </ul>
 </Layout>
 
 <style>
-    h2 {
-        color: white;
-    }
+  h2 {
+    color: white;
+  }
 </style>
