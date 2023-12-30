@@ -1,0 +1,12 @@
+---
+import BlogTag from "../../components/BlogTag.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const allPosts = await Astro.glob("../posts/*.md");
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+---
+
+<Layout title="All Tags">
+  <h1>All Tags</h1>
+  <div class="tags">{tags.map((tag) => <BlogTag tag={tag} />)}</div>
+</Layout>
