@@ -10,9 +10,3 @@
   <h3>{greeting}! Thank you for visiting!</h3>
   <button on:click={() => (++index)}> New Greeting </button>
 </div>
-
-<style>
-  h3 {
-    color: black;
-  }
-</style>

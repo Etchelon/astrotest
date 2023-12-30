@@ -1,4 +1,5 @@
 ---
+import Skills from "../components/Skills.astro";
 import Layout from "../layouts/Layout.astro";
 
 const identity = {
@@ -19,10 +20,6 @@ const skills = [
   "and now even Astro!",
 ];
 
-let showBackendSkills = false;
-function toggleBackendSkills() {
-  showBackendSkills = !showBackendSkills;
-}
 const backendSkills = [
   "C#",
   ".NET Core",
@@ -33,8 +30,6 @@ const backendSkills = [
   "GraphQL",
   "Apollo",
 ];
-
-let skillColor = "green";
 ---
 
 <Layout title="About">
@@ -50,36 +45,25 @@ let skillColor = "green";
       )
     }
   </ul>
-  <p>My Frontend skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
+  <Skills skills={skills} type="Frontend" />
   <div>
-    <input
-      id="showBE"
-      type="checkbox"
-      value={showBackendSkills}
-      onchange={toggleBackendSkills}
-    />
+    <input id="showBE" type="checkbox" />
     <label for="showBE">Show Backend skills</label>
   </div>
-  {
-    showBackendSkills && (
-      <>
-        <p>My Backend skills are:</p>
-        <ul>
-          {backendSkills.map((skill) => (
-            <li class="skill">{skill}</li>
-          ))}
-        </ul>
-      </>
-    )
-  }
+  <div id="backendSkills" class="hidden">
+    <Skills skills={backendSkills} type="Backend" />
+  </div>
 </Layout>
 
-<style define:vars={{ skillColor }}>
-  .skill {
-    color: var(--skillColor);
-    font-weight: bold;
-  }
+<script is:inline>
+  document.getElementById("showBE").addEventListener("change", function () {
+    // const show = this.checked;
+    document.getElementById("backendSkills").classList.toggle("hidden");
+  });
+</script>
+
+<style>
+    .hidden {
+        display: none;
+    }
 </style>

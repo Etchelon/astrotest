@@ -1,10 +1,101 @@
 ---
-import Hamburger from './Hamburger.astro';
-import Navigation from './Navigation.astro';
+import Hamburger from "./Hamburger.astro";
+import Navigation from "./Navigation.astro";
+import ThemeIcon from "./ThemeIcon.astro";
 ---
+
 <header>
   <nav>
-    <Hamburger />
+    <div class="buttons">
+      <Hamburger />
+      <ThemeIcon />
+    </div>
     <Navigation />
   </nav>
 </header>
+
+<style>
+    .buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+</style>
+<style is:global>
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0;
+  }
+
+  /* nav styles */
+  .hamburger {
+    padding-right: 12px;
+    cursor: pointer;
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: #ff9776;
+  }
+
+  .nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    background-color: #ff9776;
+    display: none;
+    margin: 0;
+  }
+
+  .nav-links a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover,
+  a:focus {
+    background-color: #ff9776;
+  }
+
+  .dark .nav-links a {
+    color: #fff;
+  }
+
+  .expanded {
+    display: unset;
+  }
+
+  @media screen and (min-width: 636px) {
+    nav {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .nav-links {
+      margin-left: 1em;
+      display: block;
+      position: static;
+      width: auto;
+      background: none;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 15px 20px;
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+</style>

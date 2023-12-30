@@ -1,0 +1,16 @@
+---
+const { skills, type } = Astro.props;
+const skillColor = "green";
+---
+
+<p>My {type} skills are:</p>
+<ul>
+  {skills.map((skill: string) => <li class="skill">{skill}</li>)}
+</ul>
+
+<style define:vars={{ skillColor }}>
+  .skill {
+    color: var(--skillColor);
+    font-weight: bold;
+  }
+</style>
